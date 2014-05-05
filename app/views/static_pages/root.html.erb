@@ -1,0 +1,29 @@
+<div id="content" class="container"></div>
+<%= javascript_include_tag "application" %>
+
+
+<script type="application/json" id="board-data">
+  <%= render partial: "api/boards/board", collection: @boards %>
+</script>
+
+
+<script>
+
+  console.log("fun");
+  var $elem = $("#board-data").html();
+  var data = JSON.parse($elem);
+  console.log("data: ", data);
+  var $content = $("#content");
+
+
+  var boards = new Trellino.Collections.Boards([], data);
+
+  new Trellino.Routers.Boards({
+    $rootEl: $content
+  });
+  Backbone.history.start();
+
+  // $(function () {
+//     // put stuff here
+//   });
+</script>
